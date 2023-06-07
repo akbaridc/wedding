@@ -1,0 +1,341 @@
+@media (max-width: 575px) {
+  .d-xs-block {
+    display: block !important;
+  }
+
+  .d-xs-none {
+    display: none !important;
+  }
+
+  /** Col */
+
+  .col-xs-1 {
+    flex: 0 0 auto;
+    width: 8.3333%;
+  }
+
+  .col-xs-2 {
+    flex: 0 0 auto;
+    width: 16.6667%;
+  }
+
+  .col-xs-3 {
+    flex: 0 0 auto;
+    width: 25%;
+  }
+
+  .col-xs-4 {
+    flex: 0 0 auto;
+    width: 33.3333%;
+  }
+
+  .col-xs-5 {
+    flex: 0 0 auto;
+    width: 41.66667%;
+  }
+
+  .col-xs-6 {
+    flex: 0 0 auto;
+    width: 50%;
+  }
+
+  .col-xs-7 {
+    flex: 0 0 auto;
+    width: 58.3333%;
+  }
+
+  .col-xs-8 {
+    flex: 0 0 auto;
+    width: 66.66667%;
+  }
+
+  .col-xs-9 {
+    flex: 0 0 auto;
+    width: 75%;
+  }
+
+  .col-xs-10 {
+    flex: 0 0 auto;
+    width: 83.3333%;
+  }
+
+  .col-xs-11 {
+    flex: 0 0 auto;
+    width: 91.66667%;
+  }
+
+  .col-xs-12 {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  /** Col */
+
+  /** Width */
+
+  .w-xs-5 {
+    width: 10%;
+  }
+
+  .w-xs-10 {
+    width: 10%;
+  }
+
+  .w-xs-15 {
+    width: 15%;
+  }
+
+  .w-xs-20 {
+    width: 20%;
+  }
+
+  .w-xs-25 {
+    width: 25%;
+  }
+
+  .w-xs-30 {
+    width: 30%;
+  }
+
+  .w-xs-35 {
+    width: 35%;
+  }
+
+  .w-xs-40 {
+    width: 40%;
+  }
+
+  .w-xs-45 {
+    width: 45%;
+  }
+
+  .w-xs-50 {
+    width: 50%;
+  }
+
+  .w-xs-55 {
+    width: 55%;
+  }
+
+  .w-xs-60 {
+    width: 60%;
+  }
+
+  .w-xs-65 {
+    width: 65%;
+  }
+
+  .w-xs-70 {
+    width: 70%;
+  }
+
+  .w-xs-75 {
+    width: 75%;
+  }
+
+  .w-xs-80 {
+    width: 80%;
+  }
+
+  .w-xs-85 {
+    width: 85%;
+  }
+
+  .w-xs-90 {
+    width: 90%;
+  }
+
+  .w-xs-95 {
+    width: 95%;
+  }
+
+  .w-xs-100 {
+    width: 100%;
+  }
+
+  /** Width */
+
+  /** Height */
+
+  .h-xs-5 {
+    width: 10%;
+  }
+
+  .h-xs-10 {
+    width: 10%;
+  }
+
+  .h-xs-15 {
+    width: 15%;
+  }
+
+  .h-xs-20 {
+    width: 20%;
+  }
+
+  .h-xs-25 {
+    width: 25%;
+  }
+
+  .h-xs-30 {
+    width: 30%;
+  }
+
+  .h-xs-35 {
+    width: 35%;
+  }
+
+  .h-xs-40 {
+    width: 40%;
+  }
+
+  .h-xs-45 {
+    width: 45%;
+  }
+
+  .h-xs-50 {
+    width: 50%;
+  }
+
+  .h-xs-55 {
+    width: 55%;
+  }
+
+  .h-xs-60 {
+    width: 60%;
+  }
+
+  .h-xs-65 {
+    width: 65%;
+  }
+
+  .h-xs-70 {
+    width: 70%;
+  }
+
+  .h-xs-75 {
+    width: 75%;
+  }
+
+  .h-xs-80 {
+    width: 80%;
+  }
+
+  .h-xs-85 {
+    width: 85%;
+  }
+
+  .h-xs-90 {
+    width: 90%;
+  }
+
+  .h-xs-95 {
+    width: 95%;
+  }
+
+  .h-xs-100 {
+    width: 100%;
+  }
+
+  /** Height */
+
+  .p-xs-0 {
+    padding: 0px;
+  }
+
+  .mb-xs-3 {
+    margin-bottom: 1rem !important;
+  }
+
+  .music {
+    right: 15px;
+  }
+
+  .navbar {
+    width: 90%;
+  }
+
+  .content-contai {
+    margin-left: 5%;
+    margin-right: 5%;
+    padding: 10px;
+  }
+
+  .navbar-bottom {
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 1.1rem;
+    color: black;
+  }
+
+  .active-nav {
+    color: var(--color-first);
+    transform: scale(1.2);
+    border-bottom: 2px solid var(--color-first);
+  }
+
+  .navbar-bottom:hover {
+    color: var(--color-first);
+    transform: scale(1.2);
+    border-bottom: 2px solid var(--color-first);
+  }
+
+  .jumbotron div h6 {
+    font-size: 3.2em;
+    top: -7px;
+  }
+
+  .parent-wave .waves {
+    height: 40px;
+    min-height: 40px;
+  }
+
+  .profile-mempelai div:first-child .img-mempelai,
+  .profile-mempelai div:last-child .img-mempelai {
+    min-width: 95%;
+    max-width: 95%;
+    min-height: 43vh;
+  }
+
+  #acara div .parent-acara {
+    flex-wrap: wrap !important;
+  }
+
+  #acara .akad,
+  #acara .resepsi {
+    max-height: 50vh;
+    min-width: 90%;
+  }
+
+  #acara .akad,
+  #acara .resepsi {
+    max-height: 60vh;
+    width: 90%;
+  }
+
+  #acara .countdown-acara {
+    width: 90%;
+  }
+
+  #acara .countdown-acara .timer h1{
+    font-size: 1.7rem;
+  }
+  
+  #acara .countdown-acara .timer p{
+    font-size: 0.9rem;
+  }
+  
+  #galery .image-galery div{
+    width: 48%;
+  }
+  
+  #galery .image-galery div img{
+    width: 100%;
+    height: 28vh;
+  }
+
+  #hadiah .card{
+    width: 100%;
+  }
+  
+

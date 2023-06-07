@@ -1,0 +1,28 @@
+@media (min-width: 1280px) and (max-width: 1366px) {
+}
+
+@media only screen and (max-width: 400px) and (min-width: 330px) {
+	.navbar-bottom {
+		margin-left: 20px;
+		margin-right: 20px;
+		font-size: 0.8rem;
+		color: black;
+	}
+
+	.profile-mempelai div:first-child .img-mempelai,
+	.profile-mempelai div:last-child .img-mempelai {
+		min-height: 37vh;
+	}
+}
+
+@media only screen and (max-width: 431px) and (min-width: 401px) {
+}
+
+@media only screen and (max-width: 460px) and (min-width: 432px) {
+}
+
+@media only screen and (max-width: 500px) and (min-width: 462px) {
+}
+
+@media only screen and (max-width: 550px) and (min-width: 503px) {
+}

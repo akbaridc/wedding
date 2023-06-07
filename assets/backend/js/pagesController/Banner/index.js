@@ -1,0 +1,79 @@
+const previewFileBannerPrimary = (event) => {
+	let parentOutput = document.getElementById('parentImgBannerUtama');
+	let output = document.getElementById('imgBannerUtama');
+
+	parentOutput.style.display = 'block';
+	parentOutput.href = URL.createObjectURL(event.target.files[0]);
+	output.style.cssText = `background-image: url('${URL.createObjectURL(event.target.files[0])}')`;
+	output.onload = function () {
+		URL.revokeObjectURL(output.src) // free memory
+	}
+}
+
+const previewFileBannerSecond = (event) => {
+	let parentOutput = document.getElementById('parentImgBannerSecond');
+	let output = document.getElementById('imgBannerSecond');
+
+	console.log({ parentOutput, output });
+	parentOutput.style.display = 'block';
+	parentOutput.href = URL.createObjectURL(event.target.files[0]);
+	output.style.cssText = `background-image: url('${URL.createObjectURL(event.target.files[0])}')`;
+	output.onload = function () {
+		URL.revokeObjectURL(output.src) // free memory
+	}
+}
+
+const handlerSaveBannerData = (event, position) => {
+	const fileBanner = $(`#${position}`)
+	if (fileBanner.val() === "") {
+		message_topright('error', `File ${position == "bannerPrimary" ? 'Utama' : 'Second'} tidak boleh kosong`);
+		return false
+	}
+
+	let formData = new FormData();
+	formData.append('files', fileBanner[0].files[0]);
+	formData.append('position', position);
+
+	const requestSaveData = () => {
+
+		event.srcElement.disabled = true;
+		$(position).html(`
+				<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+				Loading...
+		`);
+
+		$.ajax({
+			url: `${baseUrl}banner/save-data`,
+			type: "POST",
+			data: formData,
+			contentType: false,
+			processData: false,
+			dataType: "JSON",
+			beforeSend: () => {
+				event.srcElement.disabled = true;
+				$(position).html(`
+						<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+						Loading...
+					`);
+			},
+			success: function (response) {
+				if (response.status) {
+					message_topright('success', response.message);
+					setTimeout(() => location.reload(), 1000)
+				} else {
+					message_topright('error', response.message);
+				}
+			},
+			complete: () => {
+				event.srcElement.disabled = false;
+				$(position).html(`<i class="bi bi-save me-1"> Simpan</i>`);
+			},
+		});
+	}
+
+	messageBoxBeforeRequest('Pastikan data yang anda input benar!', 'Iya, Yakin', 'Tidak, Tutup').then((result) => {
+		if (result.value == true) {
+			requestSaveData();
+		}
+	});
+}

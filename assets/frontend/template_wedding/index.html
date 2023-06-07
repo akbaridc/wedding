@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="./node_modules/bootstrap/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="./node_modules/font-awesome/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./node_modules/aos/dist/aos.css" />
+    <link
+      rel="stylesheet"
+      href="./node_modules/lightbox2/dist/css/lightbox.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Nothing You Could Do|Sigmar|Noto Serif"
+    />
+
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="./assets/css/mobile-view/575px-max-width.css"
+    />
+    <link
+      rel="stylesheet"
+      href="./assets/css/mobile-view/576px-min-width.css"
+    />
+    <link
+      rel="stylesheet"
+      href="./assets/css/mobile-view/769px-min-width.css"
+    />
+    <link
+      rel="stylesheet"
+      href="./assets/css/mobile-view/992px-min-width.css"
+    />
+    <link
+      rel="stylesheet"
+      href="./assets/css/mobile-view/1200px-min-width.css"
+    />
+    <link
+      rel="stylesheet"
+      href="./assets/css/mobile-view/1279px-max-width.css"
+    />
+    <link
+      rel="stylesheet"
+      href="./assets/css/mobile-view/1280px-min-width.css"
+    />
+    <link
+      rel="stylesheet"
+      href="./assets/css/mobile-view/1365px-min-width.css"
+    />
+    <link rel="stylesheet" href="./assets/css/mobile-view/double-media.css" />
+
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+
+    <script src="./node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+
+    <title>Wedding</title>
+  </head>
+  <body>
+    <div class="custom-control custom-checkbox iconSelect mr-2">
+      <input
+        type="checkbox"
+        id="music-audio"
+        name="music-audio"
+        onclick="handlerMusicAudio(event)"
+        class="custom-control-input hidden"
+      />
+      <label class="custom-control-label" for="music-audio">
+        <i class="fa fa-volume-off"></i>
+      </label>
+    </div>
+    <nav class="navbar">
+      <div class="d-flex justify-content-between w-100">
+        <a
+          class="navbar-bottom active-nav"
+          data-link="beranda"
+          href="#beranda"
+          onclick="handlerActiveNav('beranda')"
+          ><i class="fa fa-home"></i
+        ></a>
+        <a
+          class="navbar-bottom"
+          data-link="profil"
+          href="#profil"
+          onclick="handlerActiveNav('profil')"
+          ><i class="fa fa-user"></i
+        ></a>
+        <a
+          class="navbar-bottom"
+          data-link="acara"
+          href="#acara"
+          onclick="handlerActiveNav('acara')"
+          ><i class="fa fa-calendar-o"></i
+        ></a>
+        <a
+          class="navbar-bottom"
+          data-link="galery"
+          href="#galery"
+          onclick="handlerActiveNav('galery')"
+          ><i class="fa fa-picture-o"></i
+        ></a>
+        <!-- <a class="navbar-bottom" data-link="cerita" href="#cerita" onclick="handlerActiveNav('cerita')"><i class="fa fa-pencil"></i></a> -->
+        <a
+          class="navbar-bottom"
+          data-link="hadiah"
+          href="#hadiah"
+          onclick="handlerActiveNav('hadiah')"
+          ><i class="fa fa-gift"></i
+        ></a>
+        <a
+          class="navbar-bottom"
+          data-link="ucapan"
+          href="#ucapan"
+          onclick="handlerActiveNav('ucapan')"
+          ><i class="fa fa-commenting-o"></i
+        ></a>
+      </div>
+    </nav>
+    <section
+      class="jumbotron"
+      id="beranda"
+      data-aos="fade-zoom-in"
+      data-aos-duration="200"
+    >
+      <div class="text-white">
+        <img
+          src="./assets/img/welcome-wedding.png"
+          alt="welcome"
+          class="img-fluid img-responsive mb-3"
+          width="300"
+          data-aos="fade-zoom-in"
+          data-aos-duration="400"
+        />
+        <p class="lead mt-2" data-aos="fade-zoom-in" data-aos-duration="600">
+          We are getting married
+        </p>
+        <h6 data-aos="fade-zoom-in" data-aos-duration="800">Aisyah & Akbar</h6>
+        <button
+          class="btn btn-info btn-sm"
+          data-aos="fade-zoom-in"
+          data-aos-duration="1000"
+        >
+          Open Invitation
+        </button>
+        <h5 class="mt-3 fs-6" data-aos="fade-zoom-in" data-aos-duration="1200">
+          Kepada Saudara / i : <br />
+          <span class="fs-3 fw-bold">M. Ali Romadoni</span>
+        </h5>
+      </div>
+      <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#2dd4bf" fill-opacity="1" d="M0,224L26.7,208C53.3,192,107,160,160,138.7C213.3,117,267,107,320,138.7C373.3,171,427,245,480,272C533.3,299,587,277,640,266.7C693.3,256,747,256,800,266.7C853.3,277,907,299,960,293.3C1013.3,288,1067,256,1120,229.3C1173.3,203,1227,181,1280,165.3C1333.3,149,1387,139,1413,133.3L1440,128L1440,320L1413.3,320C1386.7,320,1333,320,1280,320C1226.7,320,1173,320,1120,320C1066.7,320,1013,320,960,320C906.7,320,853,320,800,320C746.7,320,693,320,640,320C586.7,320,533,320,480,320C426.7,320,373,320,320,320C266.7,320,213,320,160,320C106.7,320,53,320,27,320L0,320Z"></path></svg> -->
+    </section>
+
+    <section class="s1 parent-wave">
+      <svg
+        class="waves"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 24 150 28"
+        preserveAspectRatio="none"
+        shape-rendering="auto"
+      >
+        <defs>
+          <path
+            id="gentle-wave"
+            d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
+          />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" fill="#2dd4bf" />
+          <use xlink:href="#gentle-wave" x="48" y="3" fill="#5eead4" />
+          <use xlink:href="#gentle-wave" x="48" y="5" fill="#ccfbf1" />
+          <use xlink:href="#gentle-wave" x="48" y="7" fill="#f0fdfa" />
+        </g>
+      </svg>
+    </section>
+
+    <!-- section profile -->
+    <section
+      class="s1"
+      id="profil"
+      data-aos="fade-up"
+      data-aos-delay="200"
+      data-aos-duration="500"
+    >
+      <div class="content-contai">
+        <div class="text-center">
+          <img
+            src="./assets/img/bismillah.png"
+            alt="bismillah"
+            class="img-fluid img-responsive text-center"
+            width="350"
+            height="100"
+          />
+          <p
+            class="fs-6"
+            style="font-style: italic; color: var(--color-font-second)"
+          >
+            Assalamu’alaikum Warahmatullahi Wabarakatuh
+          </p>
+          <p style="color: var(--color-font-first)">
+            Maha suci Allah SWT yang telah menciptakan makhluk-Nya
+            berpasang-pasangan. <br />
+            Ya Allah, perkenankanlah kami merangkai kasih sayang yang Kau
+            ciptakan di antara putra-putri kami:
+          </p>
+        </div>
+
+        <div class="row mt-5 profile-mempelai">
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-4">
+            <div
+              class="rounded-circle mb-3 img-mempelai mx-auto"
+              style="background-image: url('./assets/img/wanita.jpg')"
+              data-aos="fade-up"
+              data-aos-delay="200"
+              data-aos-duration="1000"
+            ></div>
+            <div
+              class="text-center mt-4 deskripsi"
+              data-aos="fade-up"
+              data-aos-delay="200"
+              data-aos-duration="1200"
+            >
+              <h3 class="font-nothing">Aisyah</h3>
+              <h5>Aisyah Nora Kurniawati, A.md</h5>
+              <p class="txt-orangtua">Putri Dari pasangan</p>
+              <h6><strong>Sunardi & Mudrikah</strong></h6>
+              <div class="d-flex align-items-start alamat">
+                <i class="fa fa-map-marker fs-3 me-1"></i>
+                <p class="fs-6">
+                  Dusun Kepel Rt 001 / Rw 001, Desa Ampel, Kec. Wuluhan, Kab.
+                  Jember
+                </p>
+              </div>
+              <div
+                class="d-flex align-items-center justify-content-center gap-3 sosial-media"
+              >
+                <a href=""><i class="fa fa-facebook"></i></a>
+                <a href=""><i class="fa fa-instagram"></i></a>
+                <a href=""><i class="fa fa-twitter"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div
+              class="rounded-circle img-mempelai mx-auto"
+              style="background-image: url('./assets/img/pria.jpg')"
+              data-aos="fade-up"
+              data-aos-delay="200"
+              data-aos-duration="1000"
+            ></div>
+            <div
+              class="text-center mt-4 deskripsi"
+              data-aos="fade-up"
+              data-aos-delay="200"
+              data-aos-duration="1200"
+            >
+              <h3 class="font-nothing">Akbar</h3>
+              <h5>Akbar Imawan D.C, A.md, Kom</h5>
+              <p class="txt-orangtua">Putra Dari pasangan</p>
+              <h6><strong>Suparno & (Almh) Nining W</strong></h6>
+              <div class="d-flex align-items-start alamat">
+                <i class="fa fa-map-marker fs-3 me-1"></i>
+                <p class="fs-6">
+                  Dsn Curah Rejo Rt 003 / Rw 025, Desa Cangkring, Kec.
+                  Jenggawah, Kab. Jember
+                </p>
+              </div>
+              <div
+                class="d-flex align-items-center justify-content-center gap-3 sosial-media"
+              >
+                <a href=""><i class="fa fa-facebook"></i></a>
+                <a href=""><i class="fa fa-instagram"></i></a>
+                <a href=""><i class="fa fa-twitter"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- section acara -->
+    <section
+      class="s1"
+      id="acara"
+      data-aos="fade-up"
+      data-aos-delay="200"
+      data-aos-duration="500"
+    >
+      <img src="./assets/img/foto1.jpg" alt="" />
+      <div
+        class="content-contai"
+        style="padding-top: 10vh; padding-bottom: 20vh"
+      >
+        <div class="border-1 mb-5 mx-auto rounded countdown-acara text-center">
+          <div class="d-flex justify-content-center gap-4">
+            <div
+              class="p-2 border-1 bg-white rounded timer"
+              data-aos="fade-up"
+              data-aos-delay="200"
+              data-aos-duration="400"
+            >
+              <h1 class="fw-semibold days" id="days">0</h1>
+              <p class="border-bottom-1">Hari</p>
+            </div>
+            <div
+              class="p-2 border-1 bg-white rounded timer"
+              data-aos="fade-up"
+              data-aos-delay="200"
+              data-aos-duration="600"
+            >
+              <h1 class="fw-semibold hours" id="hours">0</h1>
+              <p>Jam</p>
+            </div>
+            <div
+              class="p-2 border-1 bg-white rounded timer"
+              data-aos="fade-up"
+              data-aos-delay="200"
+              data-aos-duration="800"
+            >
+              <h1 class="fw-semibold minutes" id="minutes">0</h1>
+              <p>Menit</p>
+            </div>
+            <div
+              class="p-2 border-1 bg-white rounded timer"
+              data-aos="fade-up"
+              data-aos-delay="200"
+              data-aos-duration="1000"
+            >
+              <h1 class="fw-semibold seconds" id="seconds">0</h1>
+              <p>Detik</p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="d-flex align-items-center justify-content-center gap-5 parent-acara"
+        >
+          <div
+            class="px-4 py-4 border-1 bg-white rounded akad"
+            data-aos="fade-up"
+            data-aos-delay="200"
+            data-aos-duration="800"
+          >
+            <div class="container">
+              <h3 class="text-center font-nothing">Akad Nikah</h3>
+              <hr class="mx-auto w-25" style="opacity: 1" />
+              <div
+                class="d-flex align-items-center justify-content-center mt-5 deskripsi"
+              >
+                <div>
+                  <h6 class="text-center text-muted">
+                    Juli <br />
+                    2023
+                  </h6>
+                </div>
+                <div class="vr"></div>
+                <div>
+                  <h6 class="text-center">
+                    <span class="fs-2 fw-semibold text-muted">13</span> <br />
+                    <span class="text-muted">Kamis</span>
+                  </h6>
+                </div>
+                <div class="vr"></div>
+                <div>
+                  <h6 class="text-center text-muted">Rumah Mempelai Wanita</h6>
+                </div>
+              </div>
+
+              <div class="mt-4 text-muted text-center">
+                <h6>09.00 - Selesai WIB</h6>
+
+                <h6 class="fw-semibold mt-3 text-dark">
+                  Rumah Mempelai Wanita
+                </h6>
+                <div class="d-flex align-items-start alamat mt-3">
+                  <i class="fa fa-map-marker fs-3 me-1"></i>
+                  <p class="fs-6">
+                    Dusun Kepel Rt 001 / Rw 001, Desa Ampel, Kec. Wuluhan, Kab.
+                    Jember
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="px-4 py-4 border-1 bg-white rounded resepsi"
+            data-aos="fade-up"
+            data-aos-delay="200"
+            data-aos-duration="800"
+          >
+            <div class="container">
+              <h3 class="text-center font-nothing">Resepsi</h3>
+              <hr class="mx-auto w-25" style="opacity: 1" />
+              <div
+                class="d-flex align-items-center justify-content-center mt-5 deskripsi"
+              >
+                <div>
+                  <h6 class="text-center text-muted">
+                    Juli <br />
+                    2023
+                  </h6>
+                </div>
+                <div class="vr"></div>
+                <div>
+                  <h6 class="text-center">
+                    <span class="fs-2 fw-semibold text-muted">13</span> <br />
+                    <span class="text-muted">Kamis</span>
+                  </h6>
+                </div>
+                <div class="vr"></div>
+                <div>
+                  <h6 class="text-center text-muted">Rumah Mempelai Wanita</h6>
+                </div>
+              </div>
+
+              <div class="mt-4 text-muted text-center">
+                <h6>12.00 - Selesai WIB</h6>
+
+                <h6 class="fw-semibold mt-3 text-dark">
+                  Rumah Mempelai Wanita
+                </h6>
+                <div class="d-flex align-items-start alamat mt-3">
+                  <i class="fa fa-map-marker fs-3 me-1"></i>
+                  <p class="fs-6">
+                    Dusun Kepel Rt 001 / Rw 001, Desa Ampel, Kec. Wuluhan, Kab.
+                    Jember
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="s1 parent-wave">
+      <svg
+        class="waves"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 24 150 28"
+        preserveAspectRatio="none"
+        shape-rendering="auto"
+      >
+        <defs>
+          <path
+            id="gentle-wave"
+            d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
+          />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" fill="#2dd4bf" />
+          <use xlink:href="#gentle-wave" x="48" y="3" fill="#5eead4" />
+          <use xlink:href="#gentle-wave" x="48" y="5" fill="#ccfbf1" />
+          <use xlink:href="#gentle-wave" x="48" y="7" fill="#f0fdfa" />
+        </g>
+      </svg>
+    </section>
+
+    <!-- section galery -->
+    <section
+      class="s1"
+      id="galery"
+      data-aos="fade-up"
+      data-aos-delay="200"
+      data-aos-duration="500"
+    >
+      <div class="content-contai">
+        <h1 class="mt-3 text-center fw-600">Galery</h1>
+        <div
+          class="d-flex flex-wrap align-items-center justify-content-center mt-4 gap-2 image-galery"
+        >
+          <a
+            class="example-image-link"
+            href="./assets/img/foto.jpg"
+            data-lightbox="example-set"
+          >
+            <img class="example-image" src="./assets/img/foto.jpg" />
+          </a>
+          <a
+            class="example-image-link"
+            href="./assets/img/foto1.jpg"
+            data-lightbox="example-set"
+          >
+            <img class="example-image" src="./assets/img/foto1.jpg" />
+          </a>
+          <a
+            class="example-image-link"
+            href="./assets/img/foto.jpg"
+            data-lightbox="example-set"
+          >
+            <img class="example-image" src="./assets/img/foto.jpg" />
+          </a>
+          <a
+            class="example-image-link"
+            href="./assets/img/foto1.jpg"
+            data-lightbox="example-set"
+          >
+            <img class="example-image" src="./assets/img/foto1.jpg" />
+          </a>
+          <a
+            class="example-image-link"
+            href="./assets/img/foto.jpg"
+            data-lightbox="example-set"
+          >
+            <img class="example-image" src="./assets/img/foto.jpg" />
+          </a>
+        </div>
+        <hr class="mt-5" />
+        <div class="mt-3 mb-3">
+          <h1 class="mt-3 text-center fw-600">Maps</h1>
+          <div
+            class="mt-3 text-center"
+            data-aos="fade-up"
+            data-aos-delay="200"
+            data-aos-duration="800"
+          >
+            <iframe
+              style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; width: 100%"
+              class="rounded"
+              src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d1173.592238821942!2d113.52791480996952!3d-8.354545300518852!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zOMKwMjEnMTQuMyJTIDExM8KwMzEnNDAuNiJF!5e0!3m2!1sid!2sid!4v1683104492063!5m2!1sid!2sid"
+              height="450"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- section hadiah -->
+    <section
+      class="s1"
+      id="hadiah"
+      data-aos="fade-up"
+      data-aos-delay="200"
+      data-aos-duration="500"
+    >
+      <div class="content-contai">
+        <h1 class="mt-3 text-center fw-600">Hadiah</h1>
+        <div
+          class="d-flex flex-wrap align-items-center justify-content-center mt-4 gap-3"
+        >
+          <div
+            class="card"
+            data-aos="fade-up"
+            data-aos-delay="200"
+            data-aos-duration="600"
+          >
+            <div class="card-body">
+              <div class="d-flex align-items-center justify-content-between">
+                <div>
+                  <h3 class="fw-bold">BCA</h3>
+                  <p class="fw-semibold">Akbar Imawan Dwi Cahya</p>
+                  <div>
+                    <!-- <input
+                      type="text"
+                      class="me-2 d-inline"
+                      id="idCard12121"
+                      value="12121"
+                      disabled
+                    /> -->
+                    <p class="me-2 d-inline" id="idCard12121">12121</p>
+                    <i
+                      class="fa fa-clipboard d-inline"
+                      onclick="handlerCopyText(event, '12121')"
+                      style="cursor: pointer"
+                    ></i>
+                  </div>
+                </div>
+                <div>
+                  <img
+                    src="./assets/img/logo-bca.png"
+                    alt=""
+                    class="img-fluid img-responsive"
+                    width="80"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="card"
+            data-aos="fade-up"
+            data-aos-delay="200"
+            data-aos-duration="1000"
+          >
+            <div class="card-body">
+              <div class="d-flex align-items-center justify-content-between">
+                <div>
+                  <h3 class="fw-bold">BCA</h3>
+                  <p class="fw-semibold">Akbar Imawan Dwi Cahya</p>
+                  <div>
+                    <!-- <input
+                      type="text"
+                      class="me-2 d-inline"
+                      id="idCard12122"
+                      value="12122"
+                      disabled
+                    /> -->
+                    <p class="me-2 d-inline" id="idCard12122">12122</p>
+                    <i
+                      class="fa fa-clipboard d-inline"
+                      onclick="handlerCopyText(event, '12122')"
+                      style="cursor: pointer"
+                    ></i>
+                  </div>
+                </div>
+                <div>
+                  <img
+                    src="./assets/img/logo-bca.png"
+                    alt=""
+                    class="img-fluid img-responsive"
+                    width="80"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- section ucapan -->
+    <section
+      class="s1"
+      id="ucapan"
+      data-aos="fade-up"
+      data-aos-delay="200"
+      data-aos-duration="500"
+    >
+      <div class="content-contai">
+        <h1 class="mt-3 text-center fw-600">Ucapan</h1>
+        <div
+          class="card mt-4"
+          data-aos="fade-up"
+          data-aos-delay="200"
+          data-aos-duration="800"
+        >
+          <div class="card-body">
+            <div>
+              <div
+                class="d-flex align-items-center justify-content-between rounded p-2 pb-0 mb-2"
+                style="
+                  background: #f0fdf4;
+                  max-width: fit-content;
+                  max-height: fit-content;
+                "
+              >
+                <div class="align-self-baseline mx-auto me-3">
+                  <img
+                    src="./assets/img/foto.jpg"
+                    alt=""
+                    class="rounded-circle"
+                    width="39"
+                    height="40"
+                  />
+                </div>
+                <div>
+                  <div class="rounded">
+                    <h6 style="font-size: 13px" class="fw-bold d-inline">
+                      Akbar Imawan Dwi Cahya
+                    </h6>
+                    <small
+                      class="badge bg-danger d-inline"
+                      style="font-size: 9px"
+                      >daw</small
+                    >
+                    <p style="font-size: 12px">
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                      Asperiores impedit sapiente exercitationem nam accusantium
+                      itaque.
+                    </p>
+                    <p
+                      class="ms-auto text-end fw-bold text-muted"
+                      style="font-size: 9px"
+                    >
+                      05 Mei 2023 13:07
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="d-flex align-items-center justify-content-between rounded p-2 pb-0 mb-2 ms-4 position-relative"
+                style="
+                  background: #e2e8f0;
+                  max-width: fit-content;
+                  max-height: fit-content;
+                "
+              >
+                <i class="fa fa-level-up icon-reply position-absolute"></i>
+                <div class="align-self-baseline mx-auto me-3">
+                  <img
+                    src="./assets/img/foto.jpg"
+                    alt=""
+                    class="rounded-circle"
+                    width="39"
+                    height="40"
+                  />
+                </div>
+                <div>
+                  <div class="rounded">
+                    <h6 style="font-size: 13px" class="fw-bold d-inline">
+                      Kedua Mempelai
+                    </h6>
+                    <p style="font-size: 12px">
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                      Asperiores impedit sapiente exercitationem nam accusantium
+                      itaque.
+                    </p>
+                    <p
+                      class="ms-auto text-end fw-bold text-muted"
+                      style="font-size: 9px"
+                    >
+                      05 Mei 2023 13:07
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="footer">
+      <div class="content-contai">
+        <h6 class="text-center fw-bold">Created By AkbarIDC ❤️</h6>
+      </div>
+    </section>
+
+    <script src="./node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./node_modules/aos/dist/aos.js"></script>
+    <script src="./node_modules/lightbox2/dist/js/lightbox.js"></script>
+
+    <script src="./assets/js/app.js"></script>
+  </body>
+</html>
