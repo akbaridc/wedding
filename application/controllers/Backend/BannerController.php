@@ -47,6 +47,7 @@ class BannerController extends CI_Controller
 
 	public function store()
 	{
+		// $dataPost = file_get_contents("php://input");
 		$dataPost = (object) $this->input->post();
 		$this->upload($dataPost);
 	}
@@ -65,7 +66,7 @@ class BannerController extends CI_Controller
 		} else {
 			$uploadPath = $uploadDirectory . $name_file;
 
-			$didUpload = compressImage($fileTmpName, $uploadPath, 50);
+			$didUpload = compressImage($fileTmpName, $uploadPath, 40);
 			if (!$didUpload) {
 				echo json_encode(['status' => false, 'message' => 'Upload image failed! An error occurred on the server']);
 			} else {

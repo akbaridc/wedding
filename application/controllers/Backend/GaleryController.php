@@ -70,8 +70,6 @@ class GaleryController extends CI_Controller
             } else {
                 $uploadPath = $uploadDirectory . $name_file;
                 $didUpload = compressImage($fileTmpName, $uploadPath, 20);
-                // $didUpload = move_uploaded_file($fileTmpName, $uploadPath);
-                // $didUpload = move_uploaded_file($fileTmpName, $uploadPath);
                 if (!$didUpload) {
                     $errors[] = 'Data failed to save! An error occurred on the server';
                 }

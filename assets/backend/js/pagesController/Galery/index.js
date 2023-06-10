@@ -65,7 +65,9 @@ function handlerRemove(counter, galeryId, fileFoto, type) {
 
 		messageBoxBeforeRequest('Data yang didelete tidak dapat kembali!', 'Iya, Yakin', 'Tidak, Tutup').then((result) => {
 			if (result.value == true) {
-				postData(`${baseUrl}galery/destroy`, { galeryId, fileFoto }, 'POST').then((response) => {
+				postData(`${baseUrl}galery/destroy`, {
+					galeryId, fileFoto
+				}, 'POST', function(response){
 					if (response.status) {
 						message_topright('success', response.message);
 						setTimeout(() => location.reload(), 1000)
@@ -114,49 +116,19 @@ const handlerSaveGalery = (event) => {
 
 	const requestSaveData = () => {
 
-		event.srcElement.disabled = true;
-		$(".btn-tutup").prop('disabled', true);
-		$(".btn-simpan").html(`
-				<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-				Loading...
-		`);
-
-		$(".showLoadingImage").show();
-
-		$.ajax({
-			type: "POST",
-			url: `${baseUrl}galery/save-data`,
-			data: formData,
-			contentType: false,
-			processData: false,
-			dataType: "json",
-			beforeSend: () => {
-				event.srcElement.disabled = true;
-				$(".btn-tutup").prop('disabled', true);
-				$(".btn-simpan").html(`
-						<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-						Loading...
-					`);
-				$(".showLoadingImage").show();
-			},
-			success: function (response) {
-				if (response.status) {
-					message_topright('success', response.message);
-					setTimeout(() => {
-						handlerCloseModalTambahGalery()
-						location.reload();
-					}, 1000)
-				} else {
-					message_topright('error', response.message);
-				}
-			},
-			complete: () => {
-				event.srcElement.disabled = false;
-				$(".btn-tutup").prop('disabled', false);
-				$(".btn-simpan").html(`<i class="bi bi-save me-1"> Simpan</i>`);
-				$(".showLoadingImage").hide();
-			},
-		});
+		postData(`${baseUrl}galery/save-data`, {
+			formData: formData
+		}, 'POST', function(response){
+			if (response.status) {
+				message_topright('success', response.message);
+				setTimeout(() => {
+					handlerCloseModalTambahGalery()
+					location.reload();
+				}, 1000)
+			} else {
+				message_topright('error', response.message);
+			}
+		}, `.btn-simpan`, "multipart-formdata")
 	}
 
 	messageBoxBeforeRequest('Pastikan data yang anda input benar!', 'Iya, Yakin', 'Tidak, Tutup').then((result) => {

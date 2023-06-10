@@ -172,7 +172,7 @@ html {
 	font-size: 4em;
 	position: relative;
 	top: -5px;
-	letter-spacing: 2px;
+	letter-spacing: 4px;
 	font-family: "Sigmar";
 }
 
@@ -301,7 +301,8 @@ section:last-child {
 .profile-mempelai div:last-child .img-mempelai {
 	min-width: 80%;
 	max-width: 80%;
-	min-height: 40vh;
+	/* min-height: 40vh; */
+	min-height: 320px;
 	border: 5px solid var(--color-first);
 	background-size: cover;
 	background-position: center;
@@ -331,7 +332,7 @@ section:last-child {
 
 .alamat p {
 	line-height: normal;
-	color: var(--color-font-second);
+	color: #334155;
 }
 
 .profile-mempelai div:first-child .deskripsi .sosial-media a,

@@ -26,7 +26,7 @@
     <!-- Jquery -->
     <script src="<?= base_url('assets/frontend/node_modules/jquery/dist/jquery.min.js') ?>"></script>
 
-    <link href="<?= base_url() ?>assets/backend/vendor/simple-datatables/style.css" rel="stylesheet">
+    <!-- <link href="<?= base_url() ?>assets/backend/vendor/simple-datatables/style.css" rel="stylesheet"> -->
 
     <!-- SweetAlert -->
     <script src="<?= base_url('assets/frontend/node_modules/sweetalert2/dist/sweetalert2.all.min.js') ?>"></script>
@@ -64,23 +64,70 @@
             });
         }
 
-        async function postData(url = '', data = {}, type) {
-            if (type == "GET") {
-                const response = await fetch(url);
-
-                if (!response.ok) return response
-                return response.json();
-            } else {
-                const response = await fetch(url, {
-                    method: type,
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
+        const postData = async (url = '', data = {}, type, callbackSuccess, disabledButtonAction = "", multipartFormdata = "") => {
+            const showLoading = (condition, params = 0) => {
+                disabledButtonAction !== "" ? $(disabledButtonAction).prop("disabled", condition) : '';
+                Swal.fire({
+                    title: '<div class="spinner-border" role="status"></div> <span>Loading ...</span>',
+                    timerProgressBar: false,
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    timer: params
                 });
+            }
+            showLoading(true)
 
-                if (!response.ok) return response
-                return response.json();
+            if (type === "GET") {
+                await fetch(url).then((response) => {
+                    if (response.ok) return response.json();
+                    throw new Error('Something went wrong');
+                }).then((data) => {
+                    showLoading(false, 10)
+                    callbackSuccess(data)
+                }).catch((error) => {
+                    showLoading(false, 10)
+                    message("Error", error, 'error')
+                });
+            }
+
+            if (type === "POST") {
+                if (multipartFormdata === "") {
+                    await fetch(url, {
+                        method: type,
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    }).then((response) => {
+                        if (response.ok) return response.json();
+                        throw new Error(`${response.status} ${response.statusText}`);
+                    }).then((data) => {
+                        showLoading(false, 10)
+                        callbackSuccess(data)
+                    }).catch((error) => {
+                        showLoading(false, 10)
+                        message("Error", error.message, 'error')
+                    });
+                }
+
+                if (multipartFormdata === "multipart-formdata") {
+                    await fetch(url, {
+                        method: type,
+                        body: data.formData
+                    }).then((response) => {
+                        if (response.ok) return response.json();
+                        throw new Error(`${response.status} ${response.statusText}`);
+                    }).then((data) => {
+                        showLoading(false, 10)
+                        callbackSuccess(data)
+                    }).catch((error) => {
+                        showLoading(false, 10)
+                        message("Error", error.message, 'error')
+                    });
+                }
+
+                if (multipartFormdata !== "" && multipartFormdata !== "multipart-formdata") return message("Error!", 'If you upload file, parameter the last must be <strong>multipart-formdata</strong>', 'error')
+
             }
         }
 

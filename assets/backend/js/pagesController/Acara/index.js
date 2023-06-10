@@ -89,13 +89,6 @@ const handlerSaveDataAcara = (event, mode, akad, resepsi) => {
 	}
 
 	const requestSaveData = () => {
-
-		event.srcElement.disabled = true;
-		$(".btn-saveData").html(`
-            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-            Loading...
-        `);
-
 		const dataAcaraPost = [
 			{
 				type: 'akad',
@@ -122,23 +115,18 @@ const handlerSaveDataAcara = (event, mode, akad, resepsi) => {
 		postData(`${baseUrl}acara/save-data`, {
 			mode,
 			dataAcaraPost
-		}, 'POST').then((response) => {
-			event.srcElement.disabled = false;
-			$(".btn-saveData").html(`<i class="bi bi-save me-1"> Simpan</i>`);
-
+		}, 'POST', function(response){
 			if (response.status) {
 				message_topright('success', response.message);
 				setTimeout(() => location.href = `${baseUrl}acara`, 1000)
 			} else {
 				message_topright('error', response.message);
 			}
-		})
+		}, ".btn-saveData")
 	}
 
 	messageBoxBeforeRequest('Pastikan data yang anda input benar!', 'Iya, Yakin', 'Tidak, Tutup').then((result) => {
-		if (result.value == true) {
-			requestSaveData();
-		}
+		if (result.value) requestSaveData();
 	});
 }
 

@@ -81,8 +81,8 @@ class TamuUndanganController extends CI_Controller
             insert_table('tamu_undangan', [
                 'slug' => createSlug($value->nama),
                 'nama' => $value->nama,
-                'telepon' => $value->telepon,
-                'teman_dari' => $value->temanDari,
+                'telepon' => $value->telepon === "" ? NULL : $value->telepon,
+                'teman_dari' => $value->temanDari === "" ? NULL : $value->temanDari,
                 'link' => base_url() . "?kepada=" . createSlug($value->nama),
                 'created_at' => date('Y-m-d H:i:s')
             ]);
@@ -110,8 +110,8 @@ class TamuUndanganController extends CI_Controller
         update_table('tamu_undangan', [
             'slug' => createSlug($dataPost->nama),
             'nama' => $dataPost->nama,
-            'telepon' => $dataPost->telepon,
-            'teman_dari' => $dataPost->temanDari,
+            'telepon' => $dataPost->telepon === "" ? NULL : $dataPost->telepon,
+            'teman_dari' => $dataPost->temanDari === "" ? NULL : $dataPost->temanDari,
             'link' => base_url() . "?kepada=" . createSlug($dataPost->nama),
             'created_at' => date('Y-m-d H:i:s')
         ], ['id' => $dataPost->id]);

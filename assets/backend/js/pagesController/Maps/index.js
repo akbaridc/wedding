@@ -21,7 +21,7 @@ const handlerSaveData = (event) => {
 
     messageBoxBeforeRequest('Pastikan data yang di input sudah benar!', 'Iya, Yakin', 'Tidak, Tutup').then((result) => {
         if (result.value == true) {
-            postData(`${baseUrl}maps/save-data`, {linkMaps}, 'POST').then((response) => {
+            postData(`${baseUrl}maps/save-data`, {linkMaps}, 'POST', function(response){
                 if(response.status){
                     message_topright('success', response.message);
                     setTimeout(() => location.reload(), 1000)

@@ -11,7 +11,11 @@
 
 	.profile-mempelai div:first-child .img-mempelai,
 	.profile-mempelai div:last-child .img-mempelai {
-		min-height: 37vh;
+		min-height: 320px;
+	}
+
+	.mySwiper {
+		height: 15vh;
 	}
 }
 

@@ -39,39 +39,16 @@ const handlerSaveDataRekening = (event, mode) => {
 
     const requestSaveData = () => {
 
-        event.srcElement.disabled = true;
-        $(".btn-saveData").html(`
-            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-            Loading...
-        `);
-
-        $.ajax({
-            url: `${baseUrl}rekening/save-data`,
-            type: "POST",
-            data: formData,
-            contentType: false,
-            processData: false,
-            dataType: "JSON",
-            beforeSend: () => {
-              event.srcElement.disabled = true;
-              $(".btn-saveData").html(`
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                Loading...
-              `);
-            },
-            success: function(response) {
-              if(response.status){
+        postData(`${baseUrl}rekening/save-data`, {
+			formData: formData
+		}, 'POST', function(response){
+			if(response.status){
                 message_topright('success', response.message);
                 setTimeout(() => location.href = `${baseUrl}rekening`, 1000)
-              } else {
+            } else {
                 message_topright('error', response.message);
-              }
-            },
-            complete: () => {
-              event.srcElement.disabled = false;
-              $(".btn-saveData").html(`<i class="bi bi-save me-1"> Simpan</i>`);
-            },
-          });
+            }
+		}, ".btn-saveData", "multipart-formdata")
     }
 
     messageBoxBeforeRequest('Pastikan data yang anda input benar!', 'Iya, Yakin', 'Tidak, Tutup').then((result) => {
@@ -108,7 +85,9 @@ const getAndSetErrorValidation = (element, isError) => {
 const handlerDeleteRekening = (id, foto) => {
     messageBoxBeforeRequest('Untuk delete data ini!', 'Iya, Yakin', 'Tidak, Tutup').then((result) => {
         if (result.value == true) {
-            postData(`${baseUrl}rekening/destroy`, {id, foto}, 'POST').then((response) => {
+            postData(`${baseUrl}rekening/destroy`, {
+                id, foto
+            }, 'POST', function(response){
                 if(response.status){
                     message_topright('success', response.message);
                     setTimeout(() => location.reload(), 1000)

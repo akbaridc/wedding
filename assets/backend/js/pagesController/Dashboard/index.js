@@ -2,7 +2,7 @@
 $(document).ready(function(){
     const colorPallet = ['#16a34a', '#dc2626', '#eab308'];
 
-    postData(`${baseUrl}get-data-count-tamu-kehadiran`, {}, 'GET').then((response) => {
+    postData(`${baseUrl}get-data-count-tamu-kehadiran`, {}, 'GET', function(response){
         echarts.init(document.querySelector("#trafficChart")).setOption({
             tooltip: {
                 trigger: 'item'

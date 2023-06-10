@@ -36,39 +36,16 @@ const handlerSaveBannerData = (event, position) => {
 
 	const requestSaveData = () => {
 
-		event.srcElement.disabled = true;
-		$(position).html(`
-				<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-				Loading...
-		`);
-
-		$.ajax({
-			url: `${baseUrl}banner/save-data`,
-			type: "POST",
-			data: formData,
-			contentType: false,
-			processData: false,
-			dataType: "JSON",
-			beforeSend: () => {
-				event.srcElement.disabled = true;
-				$(position).html(`
-						<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-						Loading...
-					`);
-			},
-			success: function (response) {
-				if (response.status) {
-					message_topright('success', response.message);
-					setTimeout(() => location.reload(), 1000)
-				} else {
-					message_topright('error', response.message);
-				}
-			},
-			complete: () => {
-				event.srcElement.disabled = false;
-				$(position).html(`<i class="bi bi-save me-1"> Simpan</i>`);
-			},
-		});
+		postData(`${baseUrl}banner/save-data`, {
+			formData: formData
+		}, 'POST', function(response){
+			if (response.status) {
+				message_topright('success', response.message);
+				setTimeout(() => location.reload(), 1000)
+			} else {
+				message_topright('error', response.message);
+			}
+		}, `#${position}`, "multipart-formdata")
 	}
 
 	messageBoxBeforeRequest('Pastikan data yang anda input benar!', 'Iya, Yakin', 'Tidak, Tutup').then((result) => {

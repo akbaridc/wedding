@@ -302,7 +302,9 @@
    */
   const datatables = select('.datatable', true)
   datatables.forEach(datatable => {
-    $(datatable).DataTable();
+    $(datatable).DataTable({
+      "ordering": false
+    });
     // new simpleDatatables.DataTable(datatable);
   })
 

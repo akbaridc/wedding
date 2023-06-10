@@ -42,7 +42,7 @@ class AudioController extends CI_Controller
 
 	public function store()
 	{
-		$dataPost = (object) $this->input->post();
+		$dataPost = file_get_contents("php://input");
 		$this->upload($dataPost);
 	}
 

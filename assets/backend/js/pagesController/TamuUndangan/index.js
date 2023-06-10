@@ -1,108 +1,3 @@
-const table = $("#tableTamuUndangan").DataTable({
-    columnDefs: [{
-        sortable: false,
-        targets: [0, 1, 2, 3, 4]
-    }],
-});
-
-$('#example-select-all').on('click', function() {
-    // Get all rows with search applied
-    let rows = table.rows({
-        'search': 'applied'
-    }).nodes();
-
-    // Check/uncheck checkboxes for all rows in the table
-    $('input[name*="check-item"]', rows).map(function() {
-        if (this.checked == false) {
-        if (!this.disabled) {
-            return this.checked = true;
-        }
-        } else {
-        if (!this.disabled) {
-            return this.checked = false;
-        }
-        }
-    });
-});
-
-// Handle click on checkbox to set state of "Select all" control
-$('#tableTamuUndangan tbody').on('change', 'input[name*="check-item"]', function() {
-    // If checkbox is not checked
-    if (!this.checked && !this.disabled) {
-        let el = $('#example-select-all').get(0);
-        // If "Select all" control is checked and has 'indeterminate' property
-        if (el && el.checked && ('indeterminate' in el)) {
-        // Set visual state of "Select all" control
-        // as 'indeterminate'
-        el.indeterminate = true;
-        }
-    }
-});
-
-const handlerSendMessageWhatsapp = (event) => {
-    let rows = table.rows({
-        'search': 'applied'
-    }).nodes();
-
-    const dataChecked = $('input[name*="check-item"]', rows).map(function() {
-        if (this.checked == true && !this.disabled) {
-            return this.value
-        }
-    }).get()
-
-    if (dataChecked.length == 0) {
-        message_topright('error', 'Minimal pilih 1 tamu undangan untuk kirim pesan ke whatsapp');
-        return false;
-    }
-
-    sendMessageRequest(dataChecked)
-}
-
-const sendMessageRequest = (dataChecked) => {
-    $.ajax({
-        type: 'POST',
-        url: `${baseUrl}tamu-undangan/kirim-pesan`,
-        dataType: "JSON",
-        data: {
-            dataChecked,
-        },
-        beforeSend: function() {
-            Swal.fire({
-                title: '<span ><i class="fa fa-spinner fa-spin"></i> Loading...</span>',
-                showConfirmButton: false,
-                allowOutsideClick: false
-            });
-        },
-        success: function(response) {
-            console.log(response);
-            return false;
-            if(response.status){
-                message_topright('success', response.message);
-                setTimeout(() => location.reload(), 1300)
-            } else {
-                message_topright('error', response.message);
-            }
-        },
-        error: function(xhr) { // if error occured
-            Swal.fire({
-                title: '<span ><i class="fa fa-spinner fa-spin"></i> Loading...</span>',
-                showConfirmButton: false,
-                allowOutsideClick: false,
-                timer: 10
-            });
-        },
-        complete: function() {
-            Swal.fire({
-                title: '<span ><i class="fa fa-spinner fa-spin"></i> Loading...</span>',
-                showConfirmButton: false,
-                allowOutsideClick: false,
-                timer: 10
-            });
-        },
-    });
-}
-
-
 const handlerAddNewRow = (event) => {
     $("#tableRowTamuUndangan > tbody").append(newRecordTamuUndangan());
 }
@@ -112,7 +7,7 @@ const newRecordTamuUndangan = () => {
     const countRecordTamuUndangan = $("#tableRowTamuUndangan > tbody tr").length;
 
     return `
-        <tr id="row-${countRecordTamuUndangan + 1}">
+        <tr>
             <td>
                 <input type="text" class="form-control" id="nama-${countRecordTamuUndangan + 1}" name="nama-${countRecordTamuUndangan + 1}" placeholder="Nama Tamu Undangan">
             </td>
@@ -128,8 +23,7 @@ const newRecordTamuUndangan = () => {
 }
 
 const handlerRemove = (event, counter) => {
-    const rowTable = document.getElementById("row-" + counter);
-    rowTable.remove();
+    event.target.parentElement.parentElement.parentElement.remove();
 
     $("#tableRowTamuUndangan > tbody tr").each(function(i, v){
         const namaTamuUndangan = $(this).find("td:eq(0) input[type='text']")
@@ -137,16 +31,25 @@ const handlerRemove = (event, counter) => {
         const temenDariTamuUndangan = $(this).find("td:eq(2) input[type='text']")
         const button = $(this).find("td:eq(3) button")
 
-        namaTamuUndangan.attr('id', `nama-${i + 1}`)
-        namaTamuUndangan.attr('name', `nama-${i + 1}`)
+        if(i > 0){
+            namaTamuUndangan.attr({
+                id: `nama-${i + 1}`,
+                name: `nama-${i + 1}`,
+            })
+            
+            teleponTamuUndangan.attr({
+                id: `telepon-${i + 1}`,
+                name: `telepon-${i + 1}`,
+            })
+    
+            temenDariTamuUndangan.attr({
+                id: `temenDari-${i + 1}`,
+                name: `temenDari-${i + 1}`,
+            })
+    
+            button.attr('onclick', `handlerRemove(event, '${i + 1}')`)
+        }
         
-        teleponTamuUndangan.attr('id', `telepon-${i + 1}`)
-        teleponTamuUndangan.attr('name', `telepon-${i + 1}`)
-
-        temenDariTamuUndangan.attr('id', `temenDari-${i + 1}`)
-        temenDariTamuUndangan.attr('name', `temenDari-${i + 1}`)
-
-        button.attr('onclick', `handlerRemove(event, '${i + 1}')`)
     })
 }
 
@@ -155,11 +58,8 @@ const handlerOpenModal = (id, mode) => {
     $("#modalTamuUndangan .modal-title").html(`${mode == 'edit' ? 'Edit' : 'View'} Data Tamu Undangan`);
     mode == 'edit' ? $(".btn-simpan").show() : $(".btn-simpan").hide()
 
-    postData(`${baseUrl}tamu-undangan/getDataTamuUndanganById`, {
-        id
-    }, 'POST').then((response) => {
+    postData(`${baseUrl}tamu-undangan/getDataTamuUndanganById`, {id}, 'POST', function(response){
         if (response) {
-
             $("#namaTamuUndangan").prop('disabled', mode == 'edit' ? false : true);
             $("#teleponTamuUndangan").prop('disabled', mode == 'edit' ? false : true);
             $("#temanDariTamuUndangan").prop('disabled', mode == 'edit' ? false : true);
@@ -172,12 +72,47 @@ const handlerOpenModal = (id, mode) => {
     })
 }
 
-const handlerCloseModal = () => {
-    $("#modalTamuUndangan").modal('hide');
-    $("#idTamuUndangan").val('');
-    $("#namaTamuUndangan").val('');
-    $("#teleponTamuUndangan").val('');
-    $("#temanDariTamuUndangan").val('');
+const handlerGenerateMessage = (message, namaTamuUndangan, urlLink) => {
+    $("#modalGenerateMessage").modal('show');
+
+    $("#modalGenerateMessage .modal-title").html(`Generate message untuk <strong>${namaTamuUndangan}</strong>`)
+    $("#modalGenerateMessage .modal-body .container").append(`
+        <p>Kepada <strong>*${namaTamuUndangan}*</strong></p>
+        <p><i>_Assalamu'alaikum Wr.Wb_</i></p>
+        <p class="d-block">Bismillahirrahmanirrahim <span class="d-block">Tanpa mengurangi rasa hormat, izinkan kami mengundang Bapak/Ibu/Saudara/i untuk hadir serta memberikan do'a restu pada acara pernikahan kami.</span></p>
+        <p class="d-block">Untuk detail acara, lokasi serta ucapan bisa klik tautan dibawah ini: <a class="d-block" href="${urlLink}">${urlLink}</a></p>
+        
+        <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami, apabila Bapak/Ibu/Saudara/i berkenan hadir dalam acara pernikahan kami.</p>
+        <p>Atas kehadiran dan do'a restu Bapak/Ibu/Saudara/i kami ucapkan terima kasih 🙏</p>
+        <p><i>_Wassalamu'alaikum Wr.Wb._</i></p>`)
+}
+
+const handlerCopyMessage = (event) => {
+	const clipboard = new ClipboardJS(`.copyMessage`);
+
+	clipboard.on("success", function (e) {
+		message_topright("success", "Berhasil copy text");
+	});
+
+	clipboard.on("error", function (e) {
+		message_topright("error", "Gagal copy text");
+	});
+};
+
+const handlerCloseModal = (type) => {
+    if(type === 'proses') {
+        $("#modalTamuUndangan").modal('hide');
+        $("#idTamuUndangan").val('');
+        $("#namaTamuUndangan").val('');
+        $("#teleponTamuUndangan").val('');
+        $("#temanDariTamuUndangan").val('');
+    }
+
+    if(type === 'generate'){
+        $("#modalGenerateMessage").modal('hide');
+        $("#modalGenerateMessage .modal-body .container").empty();
+    }
+    
 }
 
 
@@ -196,14 +131,6 @@ const handlerSaveData = (event, mode) => {
                 message_topright('error', 'Nama Tamu Undangan masih ada yang kosong');
                 isError.value = true;
                 return false;
-            } else if (teleponTamuUndangan.val() == ""){
-                message_topright('error', 'Telepon Tamu Undangan masih ada yang kosong');
-                isError.value = true;
-                return false;
-            } else if (temenDariTamuUndangan.val() == ""){
-                message_topright('error', 'Temen Dari masih ada yang kosong');
-                isError.value = true;
-                return false;
             } else {
                 isError.value = false;
                 dataTamuUndangan.push({
@@ -219,19 +146,7 @@ const handlerSaveData = (event, mode) => {
 
         const requestSaveData = () => {
 
-            event.srcElement.disabled = true;
-            $(".btn-saveData").html(`
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                Loading...
-            `);
-
-            postData(`${baseUrl}tamu-undangan/save-data`, {
-                mode,
-                dataTamuUndangan
-            }, 'POST').then((response) => {
-                event.srcElement.disabled = false;
-                $(".btn-saveData").html(`<i class="bi bi-save me-1"> Simpan</i>`);
-                
+            postData(`${baseUrl}tamu-undangan/save-data`, {mode, dataTamuUndangan}, 'POST', function(response){
                 if(response.status){
                     message_topright('success', response.message);
                     setTimeout(() => location.href = `${baseUrl}tamu-undangan`, 1000)
@@ -267,7 +182,7 @@ const handlerSaveData = (event, mode) => {
                     nama:namaTamuUndangan,
                     telepon:teleponTamuUndangan,
                     temanDari:temanDariTamuUndangan
-                }, 'POST').then((response) => {
+                }, 'POST', function(response){
                     if(response.status){
                         message_topright('success', response.message);
                         handlerCloseModal();
@@ -286,7 +201,7 @@ const handlerSaveData = (event, mode) => {
 const handlerDeleteTamuUndangan = (id) => {
     messageBoxBeforeRequest('Untuk delete data ini!', 'Iya, Yakin', 'Tidak, Tutup').then((result) => {
         if (result.value == true) {
-            postData(`${baseUrl}tamu-undangan/destroy`, {id}, 'POST').then((response) => {
+            postData(`${baseUrl}tamu-undangan/destroy`, {id}, 'POST', function(response){
                 if(response.status){
                     message_topright('success', response.message);
                     setTimeout(() => location.reload(), 1000)

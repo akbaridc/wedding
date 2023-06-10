@@ -37,7 +37,7 @@
                     </h6>
                     <div class="d-flex align-items-start alamat">
                         <i class="fa fa-map-marker fs-3 me-1"></i>
-                        <p class="fs-6">
+                        <p class="fs-6 text-white-50">
                             <?= $dataMempelai['wanita']->alamat ?>
                         </p>
                     </div>
@@ -67,7 +67,7 @@
                     </h6>
                     <div class="d-flex align-items-start alamat">
                         <i class="fa fa-map-marker fs-3 me-1"></i>
-                        <p class="fs-6">
+                        <p class="fs-6 text-white-50">
                             <?= $dataMempelai['pria']->alamat ?>
                         </p>
                     </div>

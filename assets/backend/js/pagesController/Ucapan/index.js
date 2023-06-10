@@ -25,18 +25,15 @@ const handlerSaveData = (event) => {
 
 	messageBoxBeforeRequest('Pastikan data yang anda input benar!', 'Iya, Yakin', 'Tidak, Tutup').then((result) => {
 		if (result.value == true) {
-			postData(`${baseUrl}ucapan/reply-ucapan`, {
-				id,
-				reply
-			}, 'POST').then((response) => {
-				if (response.status) {
+			postData(`${baseUrl}ucapan/reply-ucapan`, {id, reply}, 'POST', function(response){
+                if (response.status) {
 					message_topright('success', response.message);
 					handlerCloseModal();
 					setTimeout(() => location.reload(), 1000)
 				} else {
 					message_topright('error', response.message);
 				}
-			})
+            })
 		}
 	});
 

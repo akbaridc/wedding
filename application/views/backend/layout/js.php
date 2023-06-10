@@ -7,6 +7,7 @@
 <script src="<?= base_url() ?>assets/backend/vendor/tinymce/tinymce.min.js"></script>
 <!-- <script src="<?= base_url() ?>assets/backend/vendor/php-email-form/validate.js"></script> -->
 <!-- <script src="<?= base_url() ?>assets/backend/vendor/simple-datatables/simple-datatables.js"></script> -->
+<script src="<?= base_url() ?>node_modules/clipboard/dist/clipboard.min.js"></script>
 
 
 <?php if ($this->session->flashdata('success')) { ?>

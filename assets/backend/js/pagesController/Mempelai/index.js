@@ -98,39 +98,16 @@ const handlerSaveDataMempelai = (event, mode) => {
 
 	const requestSaveData = () => {
 
-		event.srcElement.disabled = true;
-		$(".btn-saveData").html(`
-            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-            Loading...
-        `);
-
-		$.ajax({
-			url: `${baseUrl}mempelai/save-data`,
-			type: "POST",
-			data: formData,
-			contentType: false,
-			processData: false,
-			dataType: "JSON",
-			beforeSend: () => {
-				event.srcElement.disabled = true;
-				$(".btn-saveData").html(`
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                Loading...
-              `);
-			},
-			success: function (response) {
-				if (response.status) {
-					message_topright('success', response.message);
-					setTimeout(() => location.href = `${baseUrl}mempelai`, 1000)
-				} else {
-					message_topright('error', response.message);
-				}
-			},
-			complete: () => {
-				event.srcElement.disabled = false;
-				$(".btn-saveData").html(`<i class="bi bi-save me-1"> Simpan</i>`);
-			},
-		});
+		postData(`${baseUrl}mempelai/save-data`, {
+			formData: formData
+		}, 'POST', function(response){
+			if (response.status) {
+				message_topright('success', response.message);
+				setTimeout(() => location.href = `${baseUrl}mempelai`, 1000)
+			} else {
+				message_topright('error', response.message);
+			}
+		}, ".btn-saveData", "multipart-formdata")
 	}
 
 	messageBoxBeforeRequest('Pastikan data yang anda input benar!', 'Iya, Yakin', 'Tidak, Tutup').then((result) => {
