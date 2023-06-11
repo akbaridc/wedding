@@ -66,7 +66,7 @@ class BannerController extends CI_Controller
 		} else {
 			$uploadPath = $uploadDirectory . $name_file;
 
-			$didUpload = compressImage($fileTmpName, $uploadPath, 40);
+			$didUpload = compressImage($fileTmpName, $uploadPath, 20);
 			if (!$didUpload) {
 				echo json_encode(['status' => false, 'message' => 'Upload image failed! An error occurred on the server']);
 			} else {

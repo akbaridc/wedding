@@ -115,7 +115,7 @@ class RekeningController extends CI_Controller
     private function addRequest($dataPost, $fileTmpName, $uploadPath, $name_file)
     {
         $didUpload = move_uploaded_file($fileTmpName, $uploadPath);
-        // $didUpload = compressImage($fileTmpName, $uploadPath, 50);
+        // $didUpload = compressImage($fileTmpName, $uploadPath, 20);
         if (!$didUpload) {
             echo json_encode(['status' => false, 'message' => 'Upload image failed! An error occurred on the server']);
         } else {
@@ -153,11 +153,11 @@ class RekeningController extends CI_Controller
 
         $dataUpdate = [
             'rekening' => $dataPost->rekening,
-			'color' => $dataPost->color,
+            'color' => $dataPost->color,
         ];
 
         if ($name_file != null) {
-            // compressImage($fileTmpName, $uploadPath, 50);
+            // compressImage($fileTmpName, $uploadPath, 20);
             move_uploaded_file($fileTmpName, $uploadPath);
             $dataUpdate['logo'] = $name_file;
         }

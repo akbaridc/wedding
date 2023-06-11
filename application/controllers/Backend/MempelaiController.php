@@ -130,7 +130,7 @@ class MempelaiController extends CI_Controller
     private function addRequest($dataPost, $fileTmpName, $uploadPath, $name_file)
     {
         // $didUpload = move_uploaded_file($fileTmpName, $uploadPath);
-        $didUpload = compressImage($fileTmpName, $uploadPath, 50);
+        $didUpload = compressImage($fileTmpName, $uploadPath, 20);
         if (!$didUpload) {
             echo json_encode(['status' => false, 'message' => 'Upload image failed! An error occurred on the server']);
         } else {
@@ -150,14 +150,14 @@ class MempelaiController extends CI_Controller
 
             if (!empty($dataPost->sosialMedia)) {
                 foreach ($dataPost->sosialMedia as $value) {
-					$sosialMedia = explode('|', $value);
-					insert_table('mempelai_detail', [
-						'id_mempelai' => $lastId,
-						'nama' => $sosialMedia[0],
-						'link' => $sosialMedia[1],
-						'icon' => $sosialMedia[2],
-						'created_at' => date('Y-m-d H:i:s')
-					]);
+                    $sosialMedia = explode('|', $value);
+                    insert_table('mempelai_detail', [
+                        'id_mempelai' => $lastId,
+                        'nama' => $sosialMedia[0],
+                        'link' => $sosialMedia[1],
+                        'icon' => $sosialMedia[2],
+                        'created_at' => date('Y-m-d H:i:s')
+                    ]);
                 }
             }
 
@@ -192,7 +192,7 @@ class MempelaiController extends CI_Controller
         ];
 
         if ($name_file != null) {
-            compressImage($fileTmpName, $uploadPath, 50);
+            compressImage($fileTmpName, $uploadPath, 20);
             // move_uploaded_file($fileTmpName, $uploadPath);
             $dataUpdate['foto'] = $name_file;
         }
@@ -203,7 +203,7 @@ class MempelaiController extends CI_Controller
 
         if (!empty($dataPost->sosialMedia)) {
             foreach ($dataPost->sosialMedia as $value) {
-				$sosialMedia = explode('|', $value);
+                $sosialMedia = explode('|', $value);
                 insert_table('mempelai_detail', [
                     'id_mempelai' => $dataPost->mempelaiId,
                     'nama' => $sosialMedia[0],
